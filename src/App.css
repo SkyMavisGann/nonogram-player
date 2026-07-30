@@ -48,6 +48,7 @@ html, body {
   /* Take up the whole container, but max out at 85% of the screen */
   width: 100%;
   max-width: 85vmin; 
+  max-height: 75vh;
   aspect-ratio: 1 / 1; 
   
   /* Clue areas get 1 fraction of space, grid gets 3 fractions */
