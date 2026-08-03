@@ -15,7 +15,7 @@ function App() {
   return (
     <main className='app-container'>
 
-      <div className='scrollableWindow'
+      <div className='scrollable-window'
         onTouchStart={startPinch}
         onTouchMove={movePinch}>
 

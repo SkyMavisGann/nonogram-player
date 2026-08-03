@@ -17,6 +17,10 @@ html, body {
   padding: 5vw; 
   box-sizing: border-box;
 }
+.scrollable-window {
+  overscroll-behavior: none; /* Stops the pull-to-refresh reload bounce */
+  touch-action: none; /* Stops the browser from fighting your custom pinch code */
+}
 
 
 /*inside grid*/
