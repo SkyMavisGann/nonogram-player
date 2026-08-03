@@ -1,10 +1,14 @@
 import { useRef } from 'react';
-import type { TouchEvent } from 'react';
+import type { TouchEvent, RefObject } from 'react';
 
-export function UsePinchZoom(currentCellSize: number, SetCellSize: (size: number) => void) {
+export function UsePinchZoom(currentCellSize: number, SetCellSize: (size: number) => void, scrollRef: RefObject<HTMLDivElement | null>) {
 
     //a variable that wont get wiped
     const pinchData = useRef({
+        mode: 'none',
+        initalX: 0,
+        initalY: 0,
+
         initalDistance: 0,
         initalCellSize: 0,
     });
@@ -14,7 +18,13 @@ export function UsePinchZoom(currentCellSize: number, SetCellSize: (size: number
      * @param event 
      */
     const startPinch = (event: TouchEvent<HTMLDivElement>) => {
-        if (event.touches.length >= 2) {
+
+        if (event.touches.length === 1) {
+            pinchData.current.initalX = event.touches[0].clientX;
+            pinchData.current.initalY = event.touches[0].clientY;
+            pinchData.current.mode = 'pan';
+        } else if (event.touches.length >= 2) {
+            pinchData.current.mode = 'zoom';
             const distanceX = event.touches[1].clientX - event.touches[0].clientX;
             const distanceY = event.touches[1].clientY - event.touches[0].clientY;
             pinchData.current.initalDistance = Math.sqrt(
@@ -26,7 +36,17 @@ export function UsePinchZoom(currentCellSize: number, SetCellSize: (size: number
     }
 
     const movePinch = (event: TouchEvent<HTMLDivElement>) => {
-        if (event.touches.length >= 2) {
+
+        if (event.touches.length === 1 && pinchData.current.mode === 'pan') {
+            const distanceX = pinchData.current.initalX - event.touches[0].clientX;
+            const distanceY = pinchData.current.initalY - event.touches[0].clientY;
+
+            if (scrollRef.current) {
+                scrollRef.current.scrollLeft -= distanceX;
+                scrollRef.current.scrollTop -= distanceY;
+            }
+
+        } else if (event.touches.length >= 2 && pinchData.current.mode === 'zoom') {
             const distanceX = event.touches[1].clientX - event.touches[0].clientX;
             const distanceY = event.touches[1].clientY - event.touches[0].clientY;
             const currentDistanceBetweenFingers = Math.sqrt(

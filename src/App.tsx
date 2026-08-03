@@ -1,6 +1,6 @@
 import './App.css'; // We will use this file for our layout styles later
 import NonogramBoard from './components/NonogramBoard';
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { UsePinchZoom } from './usePinchZoom';
 
 
@@ -8,9 +8,9 @@ function App() {
   
 
   const [cellSize, setCellSize] = useState(35);
+  const scrollWindowRef = useRef<HTMLDivElement | null>(null);
 
-
-  const { startPinch, movePinch } = UsePinchZoom(cellSize, setCellSize);
+  const { startPinch, movePinch } = UsePinchZoom(cellSize, setCellSize, scrollWindowRef);
   // Everything inside the return() is what gets drawn to the screen
   return (
     <main className='app-container'>
