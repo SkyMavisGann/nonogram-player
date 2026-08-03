@@ -4,7 +4,7 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow-y: hidden; /* Prevents accidental horizontal scrolling */
+  
 }
 
 .app-container {
@@ -22,16 +22,13 @@ html, body {
 /*inside grid*/
 .nonogram-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  gap: 2px;
+  gap: 1px; 
   background-color: #333; 
-  
-  /* Swapped padding for border to keep grid alignment mathematically perfect */
   border: 2px solid #333; 
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  /* Removed the hardcoded repeat()! */
 }
 
 .cell {
@@ -44,38 +41,35 @@ html, body {
 
 .nonogram-board {
   display: grid;
-  
-  /* Take up the whole container, but max out at 85% of the screen */
-  width: 100%;
-  max-width: 85vmin; 
-  max-height: 75vh;
-  aspect-ratio: 1 / 1; 
-  
-  /* Clue areas get 1 fraction of space, grid gets 3 fractions */
-  grid-template-columns: 1fr 3fr;
-  grid-template-rows: 1fr 3fr;
-  
-  gap: 2%; /* Use a percentage for the gap so it shrinks on mobile */
+  width: max-content;
+  gap: 1%; 
   margin-top: 2vh;
+  /* Removed the hardcoded fr units and the 1/1 aspect ratio! */
 }
 
 /* The Clue Containers */
 .top-clues {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 2px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  gap: 1px; 
   width: 100%;
-  padding: 0 2px; /* Offsets the border added to the grid below */
+  padding: 0 2px; 
   box-sizing: border-box;
+  /* Removed the hardcoded repeat()! */
 }
 
 .left-clues {
   display: grid;
-  grid-template-rows: repeat(5, 1fr);
-  gap: 2px;
+  position: sticky;
+  gap: 1px; 
+  left: 0;
+  z-index: 2;
   height: 100%;
   padding: 2px 0;
   box-sizing: border-box;
+  /* Removed the hardcoded repeat()! */
 }
 
 /* Base styling for the clue spaces */
@@ -90,7 +84,7 @@ html, body {
   /* Centers the numbers perfectly within the cell */
   align-items: center;
   justify-content: center;
-  gap: 4px; /* Adds a tiny space between multiple numbers */
+  gap: 2px; /* Adds a tiny space between multiple numbers */
 }
 
 /* Specific alignments so the numbers sit flush against the playable area */

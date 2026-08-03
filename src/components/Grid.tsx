@@ -1,10 +1,17 @@
 import { useState } from "react";
 
-export default function Grid() {
+interface GridProps {
+  rows: number;
+  cols: number;
+  size: number;
+}
 
-    const [gridData, setGridData] = useState(Array(25).fill(false));
+export default function Grid({ rows, cols, size}: GridProps) {
+
+    const [gridData, setGridData] = useState(Array(rows * cols).fill(false));
 
 
+    //flips i's element boolean
     const toggleCell = (i: number) => {
         const newGridData = [...gridData];
         newGridData[i] = !newGridData[i];
@@ -13,8 +20,12 @@ export default function Grid() {
     }
 
     return (
-        <div className="nonogram-grid">
-            {/*waduidw*/}
+        <div className="nonogram-grid"
+        style={{
+        gridTemplateColumns: `repeat(${cols}, ${size}px)`,
+        gridTemplateRows: `repeat(${rows}, ${size}px)`
+      }}>
+
             {gridData.map((isFilled, index) => (
                 <div 
                 key={index} 
