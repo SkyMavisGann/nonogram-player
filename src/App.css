@@ -18,6 +18,13 @@ html, body {
   box-sizing: border-box;
 }
 .scrollable-window {
+  width: 100%;
+  max-width: 95vw;
+  height: 80vh; 
+  
+  /* 2. Tell the browser to handle the overflow! */
+  /* Without this line, scrollLeft and scrollTop are permanently disabled */
+  overflow: hidden;
   overscroll-behavior: none; /* Stops the pull-to-refresh reload bounce */
   touch-action: none; /* Stops the browser from fighting your custom pinch code */
 }
@@ -61,6 +68,7 @@ html, body {
   width: 100%;
   padding: 0 2px; 
   box-sizing: border-box;
+  align-items: end;
   /* Removed the hardcoded repeat()! */
 }
 
@@ -73,6 +81,7 @@ html, body {
   height: 100%;
   padding: 2px 0;
   box-sizing: border-box;
+  align-items: right;
   /* Removed the hardcoded repeat()! */
 }
 
@@ -87,7 +96,8 @@ html, body {
 
   /* Centers the numbers perfectly within the cell */
   align-items: center;
-  justify-content: center;
+  justify-content: right;
+  
   gap: 2px; /* Adds a tiny space between multiple numbers */
 }
 
@@ -110,4 +120,13 @@ html, body {
 .cell:hover {
   cursor: pointer;
   
+}
+
+/* Thick lines*/
+.thick-right {
+  border-right: 2px solid #333;
+}
+
+.thick-bottom {
+  border-bottom: 2px solid #333;
 }
